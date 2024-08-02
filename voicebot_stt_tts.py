@@ -1,10 +1,25 @@
 import streamlit as st
 
+# OpenAI 패키지 추가
+import openai
+import os
+from dotenv import load_dotenv
+
+# .env 파일 로딩, .env 파일이 현재dir이 아닐때 경로지정
+load_dotenv()
+
+# open ai api 키 설정
+api_key = os.environ.get('OPEN_API_KEY')
+
+# openapi 객체 생성
+openai.OpenAI(api_key=api_key)
+
+
 def main():
     st.set_page_config(page_title="음성 챗봇", layout="wide")
 
     # 제목
-    st.header("음성 챗봇 프로그램")
+    st.header("음성 챗봇 프로그램이")
 
     # 구분선
     st.markdown("---")
@@ -18,6 +33,18 @@ def main():
             """
         )
         st.markdown("")
+    # 사이드바 생성
+    with st.sidebar:
+
+        # GPT 모델을 선택하기 위한 라디오 버튼
+        model = st.radio(label="GPT 모델", options=["gpt-3.5-turbo", "gpt-4o", "gpt-4-turbo"])
+        st.markdown("---")
+
+        # 리셋 버튼 생성
+        if st.button(label="초기화"):
+            # 리셋 코드
+            pass
+    
 
 if __name__ == "__main__":
     print(__name__)
